@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이체크(i-CHECK) — 부모와 교사가 함께 아이의 성장을 지키는 플랫폼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Scroll Animation Utilities */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        :root {
+            --primary: #1B4D3E;
+            --secondary: #2D7A5D;
+            --accent: #FF6B4A;
+            --success: #4CAF7F;
+            --text-dark: #0F1419;
+            --text-light: #5A6B7A;
+            --text-lighter: #8A95A5;
+            --bg-white: #FFFFFF;
+            --bg-ultra-light: #F9FAFB;
+            --bg-light: #F3F5F7;
+            --border: #E8EAED;
+            --shadow-sm: 0 2px 8px rgba(15, 20, 25, 0.06);
+            --shadow-md: 0 12px 32px rgba(15, 20, 25, 0.1);
+            --shadow-lg: 0 20px 56px rgba(15, 20, 25, 0.14);
+            --shadow-xl: 0 32px 80px rgba(15, 20, 25, 0.18);
+            --shadow-2xl: 0 40px 100px rgba(15, 20, 25, 0.22);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: var(--bg-ultra-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 16px;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+
+        .header-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F5F7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 24px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(45, 122, 93, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 74, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(50px); }
+        }
+
+        .hero-content {
+            max-width: 920px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 28px;
+            letter-spacing: -1.5px;
+            color: var(--text-dark);
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: -0.3px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+            letter-spacing: -0.3px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 120px 24px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            color: var(--text-dark);
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--bg-white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+
+        .stat-card {
+            background: var(--bg-ultra-light);
+            padding: 48px 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideUp 0.6s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 12px rgba(27, 77, 62, 0.15);
+        }
+
+        .stats-grid > :nth-child(1) { animation-delay: 0.1s; }
+        .stats-grid > :nth-child(2) { animation-delay: 0.2s; }
+        .stats-grid > :nth-child(3) { animation-delay: 0.3s; }
+        .stats-grid > :nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .stat-text {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* Personas Section */
+        .personas-section {
+            background: var(--bg-ultra-light);
+        }
+
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .persona-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--border);
+            animation: slideUp 0.6s ease-out backwards;
+            box-shadow: var(--shadow-md);
+        }
+
+        .personas-grid > :nth-child(1) { animation-delay: 0.1s; }
+        .personas-grid > :nth-child(2) { animation-delay: 0.2s; }
+        .personas-grid > :nth-child(3) { animation-delay: 0.3s; }
+
+        .persona-card:hover {
+            transform: translateY(-16px);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--accent);
+        }
+
+        .persona-header {
+            padding: 48px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .persona-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        .persona-header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .persona-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .persona-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .persona-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .persona-body {
+            padding: 40px;
+        }
+
+        .persona-body h4 {
+            font-size: 1.15rem;
+            margin-bottom: 16px;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .persona-body p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .persona-benefits {
+            list-style: none;
+        }
+
+        .persona-benefits li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .persona-benefits li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        /* Product Section */
+        .product-section {
+            background: var(--bg-white);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .product-visual {
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F5F7 100%);
+            border-radius: 24px;
+            padding: 50px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .dashboard-mockup {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.85rem;
+            animation: slideInUp 0.8s ease-out;
+            border: 1px solid var(--border);
+        }
+
+        .dashboard-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-tab {
+            padding: 10px 18px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            letter-spacing: -0.2px;
+        }
+
+        .dashboard-tab:hover {
+            background: var(--border);
+        }
+
+        .dashboard-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .dashboard-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .data-card {
+            background: var(--bg-light);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .data-label {
+            font-size: 0.7rem;
+            color: var(--text-lighter);
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .data-bar {
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .data-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            animation: fillBar 1.2s ease-out forwards;
+            transform-origin: left;
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0 !important;
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .data-card:nth-child(1) .data-bar-fill { animation-delay: 0.2s; }
+        .data-card:nth-child(2) .data-bar-fill { animation-delay: 0.4s; }
+        .data-card:nth-child(3) .data-bar-fill { animation-delay: 0.6s; }
+        .data-card:nth-child(4) .data-bar-fill { animation-delay: 0.8s; }
+
+        .data-value {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 800;
+            letter-spacing: -0.2px;
+        }
+
+        .product-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 24px;
+            line-height: 1.3;
+            font-weight: 900;
+            letter-spacing: -0.8px;
+        }
+
+        .product-text p {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 32px;
+        }
+
+        .feature-list li {
+            padding: 14px 0;
+            padding-left: 36px;
+            position: relative;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        /* Workflow Section */
+        .workflow-section {
+            background: var(--bg-ultra-light);
+        }
+
+        .workflow-container {
+            margin-top: 80px;
+            background: var(--bg-white);
+            border-radius: 24px;
+            padding: 80px 60px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .workflow-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 auto 24px;
+            box-shadow: var(--shadow-lg);
+            animation: scaleIn 0.6s ease-out backwards;
+            letter-spacing: -0.5px;
+        }
+
+        .workflow-step:nth-child(1) .step-number { animation-delay: 0.1s; }
+        .workflow-step:nth-child(2) .step-number { animation-delay: 0.2s; }
+        .workflow-step:nth-child(3) .step-number { animation-delay: 0.3s; }
+        .workflow-step:nth-child(4) .step-number { animation-delay: 0.4s; }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .workflow-step h4 {
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+        }
+
+        .workflow-step p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .workflow-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 35px;
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 300;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: translateX(0); }
+            50% { opacity: 1; transform: translateX(10px); }
+        }
+
+        .workflow-step:last-child::after {
+            content: '';
+        }
+
+        /* Connection Section */
+        .connection-section {
+            background: var(--bg-white);
+        }
+
+        .connection-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 80px 60px;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.8s ease-out;
+            box-shadow: var(--shadow-xl);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .connection-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .connection-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .connection-box h3 {
+            font-size: 2.2rem;
+            margin-bottom: 24px;
+            font-weight: 900;
+            letter-spacing: -0.8px;
+        }
+
+        .connection-box p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .connection-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .connection-feature {
+            background: rgba(255,255,255,0.15);
+            padding: 32px 28px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: popIn 0.6s ease-out backwards;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .connection-features > :nth-child(1) { animation-delay: 0.2s; }
+        .connection-features > :nth-child(2) { animation-delay: 0.3s; }
+        .connection-features > :nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .connection-feature:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-8px);
+        }
+
+        .connection-feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+        }
+
+        .connection-feature h4 {
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+        }
+
+        .connection-feature p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Principles Section */
+        .principles-section {
+            background: var(--bg-ultra-light);
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .principle-card {
+            background: var(--bg-white);
+            padding: 48px 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-out backwards;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .principle-card:nth-child(1) { animation-delay: 0.1s; }
+        .principle-card:nth-child(2) { animation-delay: 0.2s; }
+        .principle-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .principle-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--accent);
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .principle-card {
+            position: relative;
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .principle-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.3px;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 140px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+        }
+
+        .cta-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 24px;
+            }
+
+            .product-showcase,
+            .workflow-steps,
+            .personas-grid,
+            .principles-grid,
+            .connection-features,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-step::after {
+                content: '↓';
+                right: auto;
+                top: auto;
+                bottom: -30px;
+            }
+
+            .workflow-step:last-child::after {
+                content: '';
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .product-showcase {
+                gap: 60px;
+            }
+
+            .workflow-container {
+                padding: 60px 40px;
+            }
+
+            .connection-box {
+                padding: 60px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">i-CHECK</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#personas">가치</a></li>
+                    <li><a href="#workflow">작동 방식</a></li>
+                    <li><a href="#principles">원칙</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>아이의 성장을 잇는<br><span class="highlight">가장 신뢰받는 징검다리</span></h1>
+            <p>부모와 교사의 양방향 관찰이 만드는 객관적 데이터.<br>발달이 우려되는 순간을 놓치지 않고, 전문기관으로 빠르게 연계합니다.</p>
+            <button class="cta-button">2026 하반기 고양시 파일럿 예정</button>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="section-header">
+            <span class="section-label">현장의 목소리</span>
+            <h2 class="section-title">교육 현장의 현실</h2>
+            <p class="section-desc">부모·교사 152명 설문 (2026.6)</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">88%</div>
+                <p class="stat-text">교사는 발달이 우려되는 아이를 발견한 경험이 있습니다.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">13%</div>
+                <p class="stat-text">그러나 부모 중 교사에게 발달 이야기를 들어본 사람은 이정도뿐입니다.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">59%</div>
+                <p class="stat-text">교사가 말을 꺼내기 어려운 이유 1위: "내 주관처럼 들릴까 봐, 민원이 될까 봐"</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">75%</div>
+                <p class="stat-text">부모는 "원에서 링크를 보내주면 3분 발달 체크"에 참여할 의향이 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personas Section -->
+    <section class="personas-section" id="personas">
+        <div class="section-header">
+            <span class="section-label">3대 가치</span>
+            <h2 class="section-title">각자의 자리에서, 아이를 위해</h2>
+        </div>
+        <div class="personas-grid">
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-icon">👩‍🏫</div>
+                    <div class="persona-title">교사</div>
+                    <div class="persona-subtitle">기록은 시스템에, 아이에게 집중하세요</div>
+                </div>
+                <div class="persona-body">
+                    <h4>기록 정리로 얻는 것</h4>
+                    <p>흩어져 있던 관찰 기록이 상담 자료와 평가 대비 기록으로 한곳에 정리됩니다.</p>
+                    <ul class="persona-benefits">
+                        <li>관찰 기록 한곳에 누적</li>
+                        <li>학부모 상담 자료로 정리</li>
+                        <li>평가 대비 기록으로 연결</li>
+                        <li>퇴근 시간 단축</li>
+                        <li>데이터 기반 신뢰 구축</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-icon">🏢</div>
+                    <div class="persona-title">원장</div>
+                    <div class="persona-subtitle">평가제 대비부터 원의 브랜드까지</div>
+                </div>
+                <div class="persona-body">
+                    <h4>경쟁력으로 만드는 것</h4>
+                    <p>평가제 대비 문서 관리, 교사 업무 효율화, 그리고 학부모에게 던지는 강력한 신뢰의 메시지.</p>
+                    <ul class="persona-benefits">
+                        <li>평가제 문서 체계화</li>
+                        <li>교사 업무 부담 감소</li>
+                        <li>데이터 기반 원 운영</li>
+                        <li>학부모 신뢰도 향상</li>
+                        <li>프리미엄 원의 이미지</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-icon">👨‍👩‍👧</div>
+                    <div class="persona-title">부모</div>
+                    <div class="persona-subtitle">가장 가까운 두 시선이 만나다</div>
+                </div>
+                <div class="persona-body">
+                    <h4>안심으로 얻는 것</h4>
+                    <p>원과 가정에서의 아이 모습을 비교하고, 발달 우려 시 빠르게 전문기관으로 연계받습니다.</p>
+                    <ul class="persona-benefits">
+                        <li>양방향 관찰 데이터</li>
+                        <li>객관적 발달 정보</li>
+                        <li>빠른 전문가 연계</li>
+                        <li>3분 체크로 참여</li>
+                        <li>아이의 성장 기록</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section">
+        <div class="section-header">
+            <span class="section-label">제품</span>
+            <h2 class="section-title">한 화면에서 모든 것이 보입니다</h2>
+        </div>
+        <div class="product-showcase">
+            <div class="product-visual">
+                <div class="dashboard-mockup">
+                    <div class="dashboard-header">
+                        <div class="dashboard-tab active">발달 비교</div>
+                        <div class="dashboard-tab">기록 보기</div>
+                        <div class="dashboard-tab">상담 자료</div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="data-card">
+                            <div class="data-label">선생님 관찰</div>
+                            <div class="data-bar">
+                                <div class="data-bar-fill" style="width: 75%;"></div>
+                            </div>
+                            <div class="data-value">12회</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-label">부모님 관찰</div>
+                            <div class="data-bar">
+                                <div class="data-bar-fill" style="width: 68%;"></div>
+                            </div>
+                            <div class="data-value">9회</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-label">함께 관찰한 영역</div>
+                            <div class="data-bar">
+                                <div class="data-bar-fill" style="width: 72%;"></div>
+                            </div>
+                            <div class="data-value">4개</div>
+                        </div>
+                        <div class="data-card">
+                            <div class="data-label">추세</div>
+                            <div class="data-bar">
+                                <div class="data-bar-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="data-value">↑ 향상</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-text">
+                <h3>선생님과 부모님의 관찰이 실시간으로 비교됩니다</h3>
+                <p>아이가 원과 가정에서 어떻게 다르게 행동하는지, 또 어떤 공통점이 있는지 한눈에 파악할 수 있습니다. 객관적 데이터가 쌓일수록 신뢰는 깊어집니다.</p>
+                <ul class="feature-list">
+                    <li>원과 가정의 관찰 기록 모아보기</li>
+                    <li>발달 영역별 관찰 비교</li>
+                    <li>학부모 상담 자료로 정리</li>
+                    <li>평가 대비 기록으로 연결</li>
+                    <li>월별 발달 추세 추적</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="workflow-section" id="workflow">
+        <div class="section-header">
+            <span class="section-label">작동 방식</span>
+            <h2 class="section-title">4단계 워크플로우</h2>
+        </div>
+        <div class="workflow-container">
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h4>함께 관찰해요</h4>
+                    <p>선생님은 원에서, 부모님은 가정에서 같은 발달 기준으로 아이를 체크합니다.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h4>같은 기준으로 모아봐요</h4>
+                    <p>두 관찰이 한 화면에 모여, 아이의 모습이 어떻게 같고 다른지 보입니다.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h4>기록이 일이 되지 않게</h4>
+                    <p>쌓인 기록이 학부모 상담 자료와 평가 대비 기록으로 이어집니다.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h4>필요하면 빠르게 연계</h4>
+                    <p>발달이 우려되는 순간, 육아종합지원센터 등 전문기관으로 빠르게 안내합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connection Section -->
+    <section class="connection-section">
+        <div class="section-header">
+            <span class="section-label">안전망</span>
+            <h2 class="section-title">발견을 넘어 성장을 위한 연결로</h2>
+            <p class="section-desc">아이체크는 진단 도구가 아닙니다. 전문 상담이 필요해 보이면, 가장 빠르고 정확한 통로가 되어줍니다.</p>
+        </div>
+        <div class="connection-box">
+            <h3>골든타임을 놓치지 않는 시스템</h3>
+            <p>부모와 교사의 양방향 데이터가 만드는 객관적 기준.<br>이것이 발달이 우려되는 아이를 빠르게 발견하고, 전문가의 손으로 안내하는 가장 확실한 방법입니다.</p>
+            <div class="connection-features">
+                <div class="connection-feature">
+                    <div class="connection-feature-icon">🎯</div>
+                    <h4>빠른 발견</h4>
+                    <p>양방향 관찰로 우려 신호를 즉각 포착합니다.</p>
+                </div>
+                <div class="connection-feature">
+                    <div class="connection-feature-icon">📊</div>
+                    <h4>객관적 근거</h4>
+                    <p>데이터 기반으로 전문기관에 정확히 전달합니다.</p>
+                </div>
+                <div class="connection-feature">
+                    <div class="connection-feature-icon">🤝</div>
+                    <h4>신뢰의 연계</h4>
+                    <p>부모도 안심하고 전문가를 만날 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section class="principles-section" id="principles">
+        <div class="section-header">
+            <span class="section-label">우리의 약속</span>
+            <h2 class="section-title">신뢰의 기반</h2>
+        </div>
+        <div class="principles-grid">
+            <div class="principle-card">
+                <div class="principle-icon">💡</div>
+                <h4>진단이 아닌 관찰</h4>
+                <p>아이체크는 진단·검사가 아닙니다. 전문 상담이 필요하면 전문기관으로 안내하는 '앞단의 관찰 도구'입니다.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon">📝</div>
+                <h4>행동 그대로의 기록</h4>
+                <p>기록은 '느리다/빠르다' 판단이 아니라 아이가 한 행동 그대로를 담아냅니다.</p>
+            </div>
+            <div class="principle-card">
+                <div class="principle-icon">🔒</div>
+                <h4>부모가 정하는 공유</h4>
+                <p>무엇을 공유할지는 부모님이 정합니다. 정보 보호는 최우선입니다.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Team Section -->
+    <section class="principles-section" id="team" style="padding-top:0;">
+        <h2 class="section-title">만드는 사람들</h2>
+        <div class="principles-grid" style="max-width:820px;margin:0 auto;">
+            <div class="principle-card">
+                <h4>김유진 · 창업자</h4>
+                <p>동국대학교 BMC 산학협력단 '모두의 창업' 1기 선정(고양). 영유아 발달 관찰 서비스 아이체크를 만들고 있습니다.</p>
+            </div>
+            <div class="principle-card">
+                <h4>김은정 · 유아교육 자문</h4>
+                <p>어린이집·유치원 현장 11년, 몬테소리 교사. 현장의 눈으로 아이체크의 관찰 설계를 감수합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>아이체크와 함께 시작하세요</h2>
+        <p>2026 하반기 고양시 파일럿 예정입니다.<br>함께 아이의 성장을 지켜보는 경험을 만들어갑니다.</p>
+        <a class="cta-button" href="mailto:CONTACT_EMAIL_HERE?subject=%EC%95%84%EC%9D%B4%EC%B2%B4%ED%81%AC%20%ED%8C%8C%EC%9D%BC%EB%9F%BF%20%EB%AC%B8%EC%9D%98" style="display:inline-block;text-decoration:none;">파일럿 참여 문의</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">
+            아이체크는 낙인 우려를 넘어, 아이가 안전하게 성장할 수 있는 길을 비춥니다.<br>
+            본 서비스는 판정 도구가 아님을 명확히 선언합니다.
+        </p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Apply scroll reveal to key elements
+        document.querySelectorAll('.stat-card, .persona-card, .principle-card, .workflow-step, .connection-feature').forEach(el => {
+            el.classList.add('scroll-reveal');
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Parallax effect on hero section
+        const hero = document.querySelector('.hero');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY < window.innerHeight) {
+                hero.style.backgroundPosition = `0 ${scrollY * 0.5}px`;
+            }
+        });
+
+        // Button ripple effect
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '0';
+                ripple.style.height = '0';
+                ripple.style.background = 'rgba(255,255,255,0.5)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                const size = Math.max(rect.width, rect.height);
+                const animation = ripple.animate([
+                    { width: '0px', height: '0px', opacity: 1 },
+                    { width: size + 'px', height: size + 'px', opacity: 0 }
+                ], {
+                    duration: 600,
+                    easing: 'ease-out'
+                });
+                
+                animation.onfinish = () => ripple.remove();
+            });
+        });
+
+        // Dashboard animation on scroll
+        const dashboardMockup = document.querySelector('.dashboard-mockup');
+        if (dashboardMockup) {
+            const dashboardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        dashboardMockup.style.animation = 'slideInUp 0.8s ease-out';
+                    }
+                });
+            }, { threshold: 0.3 });
+            dashboardObserver.observe(dashboardMockup);
+        }
+    </script>
+</body>
+</html>
